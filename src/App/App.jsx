@@ -1,7 +1,9 @@
+import BaseClock from '../Component/BaseClock/BaseClock';
+
 function App() {
   return (
     <>
-      <h1>hello</h1>
+      <BaseClock />
     </>
   );
 }
