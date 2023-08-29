@@ -11,22 +11,41 @@ function BaseClock() {
   let hour = time.getHours();
   let minute = time.getMinutes();
   let secound = time.getSeconds();
+  let currentLocationGmt = parseInt(time.toTimeString().slice(12, 15));
   let day;
-
-  if (zone === 'pst') {
-    hour =
-      time.getUTCHours() - 7 < 0
-        ? time.getUTCHours() - 7 + 12
-        : time.getUTCHours() - 7;
-  } else if (zone === 'est') {
-    hour = Math.abs(time.getUTCHours() - 4);
-  }
-
-  if (time.getHours() > 12) {
+  if (time.getUTCHours() + currentLocationGmt > 12) {
     day = 'PM';
   } else {
     day = 'AM';
   }
+  if (zone === 'pst') {
+    hour =
+      Math.abs(time.getUTCHours() - 7) < 0
+        ? Math.abs(time.getUTCHours() - 7) + 12
+        : Math.abs(time.getUTCHours()) - 7;
+    if (time.getUTCHours() - 7 > 12) {
+      day = 'PM';
+    } else {
+      day = 'AM';
+    }
+  } else if (zone === 'est') {
+    hour =
+      Math.abs(time.getUTCHours() - 4) < 0
+        ? Math.abs(time.getUTCHours() - 4) + 12
+        : Math.abs(time.getUTCHours() - 4);
+    if (time.getUTCHours() - 4 > 12) {
+      day = 'PM';
+    } else {
+      day = 'AM';
+    }
+  } else if (zone === 'gmt' || zone === 'utc') {
+  }
+
+  // if (time.getUTCHours() + 6 > 12) {
+  //   day = 'PM';
+  // } else {
+  //   day = 'AM';
+  // }
 
   const tickTime = `${hour > 12 ? hour - 12 : hour}:${
     minute < 10 ? `0${minute}` : minute
@@ -47,7 +66,7 @@ function BaseClock() {
         <div className='baseClockWrap flex flex-col justify-center items-center space-y-4'>
           <h1 className='text-5xl'>TimeZone Tracker</h1>
           <h2 className='text-3xl'>{tickTime}</h2>
-          <span>Change zone: </span>
+          <span>Change zone: {time.toTimeString().slice(18)}</span>
           <select
             className='outline-none border'
             value={zone}
