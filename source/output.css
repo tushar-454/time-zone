@@ -599,9 +599,8 @@ video {
   border-width: 1px;
 }
 
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
+.p-2 {
+  padding: 0.5rem;
 }
 
 .text-3xl {

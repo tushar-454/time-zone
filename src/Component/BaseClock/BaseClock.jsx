@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
+import CreateClock from '../CreateClock/CreateClock';
 
 function BaseClock() {
   const [baseTime, setBaseTime] = useState({ time: new Date() });
+  const [allClock, setAllClock] = useState([]);
+  const [createClock, setCreateClock] = useState(false);
   const [zone, setZone] = useState('');
+  // time converter all calculation
   const { time } = baseTime;
   let hour = time.getHours();
   let minute = time.getMinutes();
@@ -10,9 +14,12 @@ function BaseClock() {
   let day;
 
   if (zone === 'pst') {
-    hour = hour - (6 + 7);
+    hour =
+      time.getUTCHours() - 7 < 0
+        ? time.getUTCHours() - 7 + 12
+        : time.getUTCHours() - 7;
   } else if (zone === 'est') {
-    hour = hour - (6 + 4);
+    hour = Math.abs(time.getUTCHours() - 4);
   }
 
   if (time.getHours() > 12) {
@@ -51,6 +58,13 @@ function BaseClock() {
             <option value='pst'>PST</option>
             <option value='est'>EST</option>
           </select>
+          <button
+            className='border p-2'
+            onClick={() => setCreateClock(!createClock)}
+          >
+            Create a Clock
+          </button>
+          {createClock ? <CreateClock /> : ''}
         </div>
       </div>
     </>

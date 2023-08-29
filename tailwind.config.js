@@ -4,6 +4,8 @@ export default {
     './src/App/*.jsx',
     './src/Pages/*.jsx',
     './src/Component/BaseClock/*.jsx',
+    './src/Component/UI/*.jsx',
+    './src/Component/CreateClock/*.jsx',
   ],
   theme: {
     extend: {},
