@@ -38,7 +38,6 @@ function BaseClock() {
     } else {
       day = 'AM';
     }
-  } else if (zone === 'gmt' || zone === 'utc') {
   }
 
   // if (time.getUTCHours() + 6 > 12) {

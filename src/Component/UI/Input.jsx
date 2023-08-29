@@ -1,15 +1,12 @@
-import { useState } from 'react';
-
-function Input({ type, name, value }) {
-  const [input, setInput] = useState(value);
+function Input({ type, name, value, handleChange, placeholder }) {
   return (
     <>
       <input
         type={type}
-        placeholder={name}
-        value={input}
+        placeholder={placeholder}
+        value={value}
         name={name}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={handleChange}
         className='border p-2'
       />
     </>

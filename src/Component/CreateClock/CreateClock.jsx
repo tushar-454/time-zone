@@ -21,7 +21,7 @@ function CreateClock() {
     <>
       <div className='flex'>
         <form>
-          <Input type='text' name='name' />
+          <Input type='text' name='name' placeholder='Name' />
           <Input type='time' />
           <Button type='submit' name='Create' handleClick={handleClick} />
         </form>
